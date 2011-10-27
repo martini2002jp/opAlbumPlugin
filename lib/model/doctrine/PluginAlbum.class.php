@@ -88,4 +88,18 @@ abstract class PluginAlbum extends BaseAlbum
 
     return in_array($this->getPublicFlag(), $flags);
   }
+
+  public function preDelete($event)
+  {
+    $images = $this->getAlbumImages();
+    foreach ($images as $image)
+    {
+      $image->delete();
+    }
+
+    if ($coverImage = $this->getCoverImage())
+    {
+      $coverImage->delete();
+    }
+  }
 }

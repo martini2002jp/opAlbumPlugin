@@ -77,4 +77,9 @@ abstract class PluginAlbumImage extends BaseAlbumImage
 
     return $this->next[$myMemberId];
   }
+
+  public function postDelete($event)
+  {
+    $this->getFile()->delete();
+  }
 }
